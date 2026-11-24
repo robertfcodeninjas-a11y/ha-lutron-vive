@@ -1,0 +1,15 @@
+raise:
+  target:
+    entity:
+      integration: lutron_vive
+      domain: light
+lower:
+  target:
+    entity:
+      integration: lutron_vive
+      domain: light
+stop:
+  target:
+    entity:
+      integration: lutron_vive
+      domain: light

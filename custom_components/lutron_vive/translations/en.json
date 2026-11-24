@@ -1,0 +1,89 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to a Lutron Vive hub",
+        "description": "In the Vive hub's web interface, add an API integration that uses **Login with a username / password**, then enter that username and password here. The hub needs firmware 1.12 or newer (HJS-2 / HMS-2 / HKS-2, or an older hub with the HJS-UPDATE license).",
+        "data": {
+          "host": "Hub IP address or hostname",
+          "port": "LEAP port",
+          "username": "API integration username",
+          "password": "API integration password"
+        },
+        "data_description": {
+          "port": "Leave at 8081 unless you know it is different."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Vive hub login failed",
+        "description": "The hub at {host} rejected the stored username / password. Enter the current API integration credentials.",
+        "data": {
+          "username": "API integration username",
+          "password": "API integration password"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Lutron Vive hub found",
+        "description": "Found Vive hub **{name}** at {host}. In the hub's web interface, add an API integration that uses **Login with a username / password**, then enter that username and password here.",
+        "data": {
+          "username": "API integration username",
+          "password": "API integration password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the hub's API on that address and port. Check the IP address, that the hub is on wired Ethernet, and that the API integration exists on the hub. Details: {detail}",
+      "invalid_auth": "The hub refused the username / password. Hub reply: {detail}",
+      "fingerprint_changed": "The hub's TLS certificate is different from the one saved at setup. If the hub was replaced or reset, remove and re-add the integration.",
+      "unknown": "Unexpected error. See the Home Assistant log.",
+      "login_failed": "The hub did not accept the login request. This is likely a bug in this integration, not your credentials. Hub reply: {detail}"
+    },
+    "abort": {
+      "already_configured": "This hub is already set up.",
+      "reauth_successful": "Login updated.",
+      "not_ipv4": "The hub was only found on an IPv6 address. Add it by hand using its IPv4 address."
+    },
+    "flow_title": "{name}"
+  },
+  "entity": {
+    "binary_sensor": {
+      "occupancy": {
+        "name": "Occupancy"
+      }
+    },
+    "sensor": {
+      "power": {
+        "name": "Power"
+      }
+    },
+    "event": {
+      "button": {
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "press": "Press",
+              "release": "Release",
+              "hold": "Hold",
+              "double_press": "Double press",
+              "multi_press": "Multi press"
+            }
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "raise": {
+      "name": "Raise",
+      "description": "Start brightening a Vive light. It keeps going until you call Stop or it reaches full brightness."
+    },
+    "lower": {
+      "name": "Lower",
+      "description": "Start dimming a Vive light. It keeps going until you call Stop or it reaches the low end."
+    },
+    "stop": {
+      "name": "Stop",
+      "description": "Stop a raise or lower that is in progress."
+    }
+  }
+}
